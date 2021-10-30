@@ -36,7 +36,7 @@ class CurrencyconverterApplicationTests {
 	@Test @Order(2)
 	void currencyConverterTest() {
 		Float value = apiConsultationService.convertTwoCurrencies("BRL,USD", 500.00f);
-		System.out.println("================> Valor em dolares: "+value);
+		System.out.println("================> "+500.00f+" reais convertido em "+value+" dolares");
 		Assertions.assertTrue(value >= 85f || value <= 95f);
 	}
 
