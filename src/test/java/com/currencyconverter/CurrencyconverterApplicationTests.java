@@ -32,5 +32,12 @@ class CurrencyconverterApplicationTests {
 			e.printStackTrace();
 		}
 	}
+	
+	@Test @Order(2)
+	void currencyConverterTest() {
+		Float value = apiConsultationService.convertTwoCurrencies("BRL,USD", 500.00f);
+		System.out.println("================> Valor em dolares: "+value);
+		Assertions.assertTrue(value >= 85f || value <= 95f);
+	}
 
 }
