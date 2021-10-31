@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.currencyconverter.document.User;
-import com.currencyconverter.service.UserService;
+import com.currencyconverter.document.Transaction;
+import com.currencyconverter.service.TransactionService;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -23,26 +23,27 @@ import reactor.core.publisher.Mono;
 @RestController
 @RequestMapping("api/v1")
 @CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST})
-public class UserController {
+public class TransactionController {
 	
 	@Autowired
-	private UserService userService;
+	private TransactionService transactionService;
 	
-	@PostMapping("/user")
+	@PostMapping("/transaction")
 	@ResponseStatus(HttpStatus.CREATED)
-	public Mono<User> create(@RequestBody User user) {
-		return userService.create(user);
+	public Mono<Transaction> create(@RequestBody Transaction transaction) {
+		return transactionService.create(transaction);
 	}
 	
-	@GetMapping("/user/{idUser}")
+	@GetMapping("/transaction/{idTransaction}")
 	@ResponseStatus(HttpStatus.OK)
-	public Mono<User> readOne(@PathVariable(value="idUser") UUID idUser) {
-		return userService.readOne(idUser);
+	public Mono<Transaction> readOne(@PathVariable("idTransaction") UUID idTransaction) {
+		return transactionService.readOne(idTransaction);
 	}
 	
-	@GetMapping("/users")
+	@GetMapping("/transactions")
 	@ResponseStatus(HttpStatus.OK)
-	public Flux<User> readAll() {
-		return userService.readAll();
+	public Flux<Transaction> readAll() {
+		return transactionService.readAll();
 	}
+
 }
