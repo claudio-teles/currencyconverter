@@ -6,7 +6,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -24,9 +26,12 @@ public class APIConsultationService {
 		return new ObjectMapper().readValue(responseStream, ExchangeRate.class);
 	}
 	
-	public Float convertTwoCurrencies(String _2currencies, Float sourceValue) {
+	public Map<String, Float> convertTwoCurrencies(String _2currencies, Float sourceValue) {
 		List<String> listCurrency = Arrays.asList(_2currencies.split(","));
 		List<Float> values = new ArrayList<>();
+		
+		Float destinationValue = null;
+		Map<String, Float> result = new HashMap<>();
 		
 		listCurrency.forEach(currency -> {
 			try {
@@ -43,13 +48,25 @@ public class APIConsultationService {
 		if (values.size() == 2) {
 			Float quotation = values.get(0) / values.get(1);
 			if (quotation < 1) {
-				return (sourceValue * quotation);
+				destinationValue = (sourceValue * quotation);
+				result.put("destinationValue", destinationValue);
+				result.put("conversionRateUsed", quotation);
+				
+				return result;
 			}
 			if (quotation == 1) {
-				return sourceValue;
+				destinationValue = sourceValue;
+				result.put("destinationValue", destinationValue);
+				result.put("conversionRateUsed", quotation);
+				
+				return result;
 			}
 			if (quotation > 1) {
-				return (sourceValue / quotation);
+				destinationValue = (sourceValue / quotation);
+				result.put("destinationValue", destinationValue);
+				result.put("conversionRateUsed", quotation);
+				
+				return result;
 			}
 		}
 		

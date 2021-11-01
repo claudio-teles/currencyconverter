@@ -1,9 +1,12 @@
 package com.currencyconverter.document;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.mongodb.lang.NonNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,10 +14,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Document @NoArgsConstructor @AllArgsConstructor @Data @Builder
-public class User {
+public class User implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8933463591026461384L;
 	@Id
 	private UUID idUser;
-	private String nome;
+	@NonNull
+	private String name;
 
 }
