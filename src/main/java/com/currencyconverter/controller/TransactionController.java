@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.currencyconverter.document.Transaction;
 import com.currencyconverter.service.TransactionService;
 
+import io.swagger.annotations.ApiOperation;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -30,18 +31,21 @@ public class TransactionController {
 	
 	@PostMapping("/transaction")
 	@ResponseStatus(HttpStatus.CREATED)
+	@ApiOperation(value = "Register a transaction")
 	public Mono<Transaction> create(@RequestBody Transaction transaction) {
 		return transactionService.create(transaction);
 	}
 	
 	@GetMapping("/transaction/{idTransaction}")
 	@ResponseStatus(HttpStatus.OK)
+	@ApiOperation(value = "Find a transaction by identifier")
 	public Mono<Transaction> readOne(@PathVariable("idTransaction") UUID idTransaction) {
 		return transactionService.readOne(idTransaction);
 	}
 	
 	@GetMapping("/transactions")
 	@ResponseStatus(HttpStatus.OK)
+	@ApiOperation(value = "Find all transactions")
 	public Flux<Transaction> readAll() {
 		return transactionService.readAll();
 	}

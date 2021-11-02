@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.currencyconverter.document.User;
 import com.currencyconverter.service.UserService;
 
+import io.swagger.annotations.ApiOperation;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -30,18 +31,21 @@ public class UserController {
 	
 	@PostMapping("/user")
 	@ResponseStatus(HttpStatus.CREATED)
+	@ApiOperation(value = "register a user")
 	public Mono<User> create(@RequestBody User user) {
 		return userService.create(user);
 	}
 	
 	@GetMapping("/user/{idUser}")
 	@ResponseStatus(HttpStatus.OK)
+	@ApiOperation(value = "Find a user by identifier")
 	public Mono<User> readOne(@PathVariable(value="idUser") UUID idUser) {
 		return userService.readOne(idUser);
 	}
 	
 	@GetMapping("/users")
 	@ResponseStatus(HttpStatus.OK)
+	@ApiOperation(value = "Find all users")
 	public Flux<User> readAll() {
 		return userService.readAll();
 	}
