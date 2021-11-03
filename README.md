@@ -38,6 +38,10 @@ Open the link in the browser: <a href="http://localhost:8080/swagger-ui/index.ht
 The API can also be tested from the project link on Heroku:
 <a href="https://newcurrencyconverter.herokuapp.com/swagger-ui/index.html" target="_blank">heroku</a>
 
+Use Postman with the following http[get, post] verbs:
+https://newcurrencyconverter.herokuapp.com/api/v1/users
+https://newcurrencyconverter.herokuapp.com/api/v1/transactions
+
 To test the API in Swagger just follow the illustrative images.
 
 <br/>
