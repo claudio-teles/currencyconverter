@@ -1,7 +1,6 @@
 package com.currencyconverter;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.UUID;
 
@@ -18,10 +17,9 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.web.reactive.function.BodyInserters;
 
-import com.currencyconverter.document.Transaction;
 import com.currencyconverter.document.User;
+import com.currencyconverter.dto.TransactionDTO;
 import com.currencyconverter.service.APIConsultationService;
-import com.currencyconverter.service.UserService;
 import com.currencyconverter.util.ExchangeRate;
 
 import reactor.core.publisher.Mono;
@@ -33,9 +31,6 @@ class CurrencyconverterApplicationTests {
 	
 	@Autowired
 	private APIConsultationService apiConsultationService;
-	
-	@Autowired
-	private UserService userService;
 	
     @LocalServerPort
     private int port;
@@ -98,19 +93,21 @@ class CurrencyconverterApplicationTests {
 	
 	@Test @Order(6)
 	void createTransactionTest() {
-		User user = userService.readOne(UUID.fromString("284c6496-3b49-11ec-8d3d-0242ac130003").toString()).block();
 		
-		Transaction transaction = new Transaction(UUID.fromString("171a6577-8452-4208-a55e-ca8a6e7d6654").toString(), user, "BRL", 800.00f, "USD", null, null, LocalDateTime.now());
+		TransactionDTO dto = new TransactionDTO();
+		dto.setIdUser("284c6496-3b49-11ec-8d3d-0242ac130003");
+		dto.setOriginCurrency("BRL");
+		dto.setDestinationCurrency("USD");
+		dto.setSourceValue(800.00f);
         
         WebTestClient.bindToServer()
         .baseUrl("http://localhost:" + port).build().post().uri("/api/v1/transaction")
-        .body(BodyInserters.fromValue(transaction))
+        .body(BodyInserters.fromValue(dto))
         .exchange()
         .expectAll(
             responseSpec -> responseSpec.expectStatus().isCreated(),
             responseSpec -> responseSpec.expectBody().jsonPath("$.sourceValue").isEqualTo(String.valueOf(800.00f))
         );
-        System.out.println("=====================> Transaction: "+transaction);
 	}
 	
 	@Test @Order(7)

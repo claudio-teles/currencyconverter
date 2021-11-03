@@ -81,6 +81,7 @@ To test the API in Swagger just follow the illustrative images.
 ![img-09](./img/09.png)
 
 <br/>
+
 ![img-10](./img/10.png)
 
 <br/>
@@ -88,6 +89,7 @@ To test the API in Swagger just follow the illustrative images.
 ![img-11](./img/11.png)
 
 <br/>
+
 ![img-12](./img/12.png)
 
 <br/>
