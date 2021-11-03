@@ -12,6 +12,7 @@ import springfox.documentation.spring.web.plugins.Docket;
  * @author claudio
  * 
  * http://localhost:8080/swagger-ui/index.html
+ * https://newcurrencyconverter.herokuapp.com/swagger-ui/index.html
  *
  */
 @Configuration

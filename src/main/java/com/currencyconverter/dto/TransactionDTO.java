@@ -1,9 +1,8 @@
-package com.currencyconverter.document;
+package com.currencyconverter.dto;
 
-import java.time.LocalDateTime;
-
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.mongodb.lang.NonNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,16 +10,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Document @NoArgsConstructor @AllArgsConstructor @Data @Builder
-public class Transaction {
+public class TransactionDTO {
 	
-	@Id
-	private String idTransaction;
-	private User idUser;
+	@NonNull
+	private String idUser;
+	@NonNull
 	private String originCurrency;
+	@NonNull
 	private Float sourceValue;
+	@NonNull
 	private String destinationCurrency;
-	private Float destinationValue;
-	private Float conversionRateUsed;
-	private LocalDateTime data;
 
 }

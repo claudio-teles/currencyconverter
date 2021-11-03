@@ -1,7 +1,5 @@
 package com.currencyconverter.controller;
 
-import java.util.UUID;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -39,7 +37,7 @@ public class UserController {
 	@GetMapping("/user/{idUser}")
 	@ResponseStatus(HttpStatus.OK)
 	@ApiOperation(value = "Find a user by identifier")
-	public Mono<User> readOne(@PathVariable(value="idUser") UUID idUser) {
+	public Mono<User> readOne(@PathVariable(value="idUser") String idUser) {
 		return userService.readOne(idUser);
 	}
 	

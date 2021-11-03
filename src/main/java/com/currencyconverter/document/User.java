@@ -1,7 +1,6 @@
 package com.currencyconverter.document;
 
 import java.io.Serializable;
-import java.util.UUID;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -21,7 +20,7 @@ public class User implements Serializable {
 	 */
 	private static final long serialVersionUID = -8933463591026461384L;
 	@Id
-	private UUID idUser;
+	private String idUser;
 	@NonNull
 	private String name;
 

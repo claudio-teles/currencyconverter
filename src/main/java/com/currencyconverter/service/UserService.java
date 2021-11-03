@@ -1,7 +1,5 @@
 package com.currencyconverter.service;
 
-import java.util.UUID;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +19,7 @@ public class UserService {
 		return userDAO.save(user);
 	}
 	
-	public Mono<User> readOne(UUID idUser) {
+	public Mono<User> readOne(String idUser) {
 		return userDAO.findById(idUser);
 	}
 	
